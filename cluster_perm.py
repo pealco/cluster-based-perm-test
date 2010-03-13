@@ -75,7 +75,7 @@ def cluster_maxsum(clusters, tests):
     return maxsum
 
 def mcmc(epochs, gold_standard, reps, cpu=None):
-    golden_standard = (golden_standard == 1)
+    gold_standard = (gold_standard == 1)
     random.seed()
     
     mcmc_samples = []
@@ -93,7 +93,7 @@ def mcmc(epochs, gold_standard, reps, cpu=None):
     for rep in xrange(reps):
         subset_a, subset_b = random_partition(epochs)
         tests = compute_statistic(subset_a, subset_b)
-        cluster_of_interest = tests * gold_standard
+        cluster_of_interest = tests[gold_standard]
         
         #maxsum = cluster_maxsum(clusters, tests)
         maxsum = sum(cluster_of_interest)
