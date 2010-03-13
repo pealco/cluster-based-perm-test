@@ -75,7 +75,7 @@ def cluster_maxsum(clusters, tests):
     return maxsum
 
 def mcmc(epochs, gold_standard, reps, cpu=None):
-    #(epochs, gold_standard, reps) = args
+    golden_standard = (golden_standard == 1)
     random.seed()
     
     mcmc_samples = []
