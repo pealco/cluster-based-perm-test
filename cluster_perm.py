@@ -88,7 +88,11 @@ def mcmc(epochs, gold_standard, reps, cpu=None):
         print "Starting MCMC process ..."
         
     if last_cpu:
-        pbar = ProgressBar().start()
+        widgets = ['', Percentage(), ' ',
+                           Bar(marker='|',left='[',right=']'),
+                           ' ', ETA(), ' ']
+        pbar = ProgressBar()
+        pbar.start()
     
     for rep in xrange(reps):
         subset_a, subset_b = random_partition(epochs)
