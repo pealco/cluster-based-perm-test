@@ -4,7 +4,7 @@ from scipy.stats import ttest_rel
 from pprint import pprint
 import numpy as np
 from multiprocessing import Pool, cpu_count
-from progressbar import ProgressBar
+from progressbar import ProgressBar, Percentage, Bar, ETA
 from neighbors import NEIGHBORS
 import warnings
 warnings.filterwarnings("ignore")
@@ -88,10 +88,8 @@ def mcmc(epochs, gold_standard, reps, cpu=None):
         print "Starting MCMC process ..."
         
     if last_cpu:
-        widgets = ['', Percentage(), ' ',
-                           Bar(marker='|',left='[',right=']'),
-                           ' ', ETA(), ' ']
-        pbar = ProgressBar()
+        widgets = ['', Percentage(), ' ', Bar(), ' ', ETA(), ' ']
+        pbar = ProgressBar(widgets=widgets)
         pbar.start()
     
     for rep in xrange(reps):
@@ -172,4 +170,4 @@ if __name__ == "__main__":
     data = tables.openFile("R0874_500_denoised.h5")
     epochs = data.root.raw_data_epochs[:,:,17:,:]
     
-    print cluster_test(epochs[0,...], epochs[1,...], reps=10000, alpha=0.05)
+    print cluster_test(epochs[0,...], epochs[1,...], reps=200, alpha=0.05)
